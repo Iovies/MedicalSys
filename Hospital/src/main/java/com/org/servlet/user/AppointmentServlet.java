@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.org.dao.AppointmentDao;
+import com.org.dao.DaoWraper;
 import com.org.entity.Appointment;
 
 @WebServlet("/appAppointment")
@@ -32,10 +32,10 @@ public class AppointmentServlet extends HttpServlet {
 		Appointment ap = new Appointment(userId, fullname, gender, age, appoint_date, email, phno, diseases, doctor_id,
 				address, "Pending");
 
-		AppointmentDao dao = new AppointmentDao();
+		DaoWraper dao = new DaoWraper();
 		HttpSession session = req.getSession();
 
-		if (dao.addAppointment(ap)) {
+		if (dao.appointmentDao.addAppointment(ap)) {
 			session.setAttribute("succMsg", "Appointment Sucessfully");
 			resp.sendRedirect("user_appointment.jsp");
 		} else {

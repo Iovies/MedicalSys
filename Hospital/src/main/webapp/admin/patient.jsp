@@ -2,7 +2,7 @@
 <%@page import="com.org.dao.DoctorDao"%>
 <%@page import="com.org.entity.Appointment"%>
 <%@page import="java.util.List"%>
-<%@page import="com.org.dao.AppointmentDao"%>
+<%@page import="com.org.dao.DaoWraper"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -49,9 +49,9 @@
 					</thead>
 					<tbody>
 						<%
-						AppointmentDao dao = new AppointmentDao();
+						DaoWraper dao = new DaoWraper();
 						DoctorDao dao2 = new DoctorDao();
-						List<Appointment> list = dao.getAllAppointment();
+						List<Appointment> list = dao.appointmentDao.getAllAppointment();
 						for (Appointment ap : list) {
 							Doctor d = dao2.getDoctorsById(ap.getDoctorId());
 						%>

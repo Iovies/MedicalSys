@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.org.dao.AppointmentDao;
+import com.org.dao.DaoWraper;
 
 @WebServlet("/updateStatus")
 public class UpdateStatus extends HttpServlet {
@@ -22,11 +22,11 @@ public class UpdateStatus extends HttpServlet {
 			int did = Integer.parseInt(req.getParameter("did"));
 			String comm = req.getParameter("comm");
 
-			AppointmentDao dao = new AppointmentDao();
+			DaoWraper dao = new DaoWraper();
 
 			HttpSession session = req.getSession();
 
-			if (dao.updateCommentStatus(id, did, comm)) {
+			if (dao.appointmentDao.updateCommentStatus(id, did, comm)) {
 				session.setAttribute("succMsg", "Comment Updated");
 				resp.sendRedirect("doctor/patient.jsp");
 			} else {
